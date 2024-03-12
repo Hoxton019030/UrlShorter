@@ -22,7 +22,7 @@ public class ShorterService {
         boolean duplicated =true;
         String base62String="";
         while (duplicated){
-            base62String = generateBase62String(createShortUrlRequest.getUrl(),createShortUrlRequest.getSize());
+            base62String = generateBase62String(createShortUrlRequest.getSize());
             Url shortUrl = shorterMapper.findByShortURL(base62String);
             //如果shortUrl是空的，代表不重複，可以創建
             if(shortUrl==null){
@@ -37,7 +37,7 @@ public class ShorterService {
         return ResponseEntity.ok().body(base62String);
     }
 
-   public String generateBase62String(String url, Integer size){
+   public String generateBase62String(Integer size){
        String shortURL;
        char[] charArray = new char[size];
 
