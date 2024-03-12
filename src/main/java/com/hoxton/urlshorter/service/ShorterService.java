@@ -4,9 +4,11 @@ import com.hoxton.urlshorter.entity.Url;
 import com.hoxton.urlshorter.mapper.ShorterMapper;
 import com.hoxton.urlshorter.request.CreateShortUrlRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.net.URI;
 import java.util.Date;
 
 @Service
@@ -21,7 +23,7 @@ public class ShorterService {
         String base62String="";
         while (duplicated){
             base62String = generateBase62String(createShortUrlRequest.getUrl(),createShortUrlRequest.getSize());
-            String shortUrl = shorterMapper.findByShortURL(base62String);
+            Url shortUrl = shorterMapper.findByShortURL(base62String);
             //如果shortUrl是空的，代表不重複，可以創建
             if(shortUrl==null){
                 duplicated=false;
@@ -45,7 +47,14 @@ public class ShorterService {
            charArray[i]=c;
        }
        shortURL =String.valueOf(charArray);
-       System.out.println("shortURL = " + shortURL);
        return shortURL;
    }
+
+    public ResponseEntity<Void> findOriginUrl(String shortUrl) {
+        Url byShortURL = shorterMapper.findByShortURL(shortUrl);
+        System.out.println("byShortURL = " + byShortURL);
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .location(URI.create(byShortURL.getOriginUrl()))
+                .build();
+    }
 }

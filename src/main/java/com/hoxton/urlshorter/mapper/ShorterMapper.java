@@ -10,6 +10,6 @@ import tk.mybatis.mapper.common.BaseMapper;
 @Mapper
 @Repository
 public interface ShorterMapper extends BaseMapper<Url> {
-    String findByShortURL(@Param("url") String shortURL);
+    Url findByShortURL(@Param("url") String shortURL);
 
 }

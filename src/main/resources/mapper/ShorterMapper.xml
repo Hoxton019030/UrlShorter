@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hoxton.urlshorter.mapper.ShorterMapper">
-    <select id="findByShortURL" resultType="java.lang.String">
+    <resultMap id="baseResultMap" type="com.hoxton.urlshorter.entity.Url">
+        <result column="id" property="id" />
+        <result column="short_url" property="shortUrl" />
+        <result column="origin_url" property="originUrl" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+    <select id="findByShortURL" resultMap="baseResultMap">
         select * from url where short_url =#{url};
     </select>
 </mapper>
