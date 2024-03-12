@@ -1,2 +1,8 @@
-package com.hoxton.urlshorter.config;public class CorsConfig {
+package com.hoxton.urlshorter.config;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class CorsConfig {
+
 }

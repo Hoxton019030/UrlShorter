@@ -11,5 +11,5 @@ public class CreateShortUrlRequest {
     /**
      * 要轉化成多少的短網址
      */
-    Integer size;
+    Integer size=5;
 }
