@@ -38,7 +38,7 @@ public class ShorterService {
     }
 
    public String generateBase62String(Integer size){
-       String shortURL;
+       String shortUrl="";
        char[] charArray = new char[size];
 
        for(int i = 0;i<size;i++){
@@ -46,17 +46,17 @@ public class ShorterService {
            char c = allowedString.charAt(randomIndex);
            charArray[i]=c;
        }
-       shortURL =String.valueOf(charArray);
-       return shortURL;
+       shortUrl =String.valueOf(charArray);
+       return shortUrl;
    }
 
     public ResponseEntity<Void> findOriginUrl(String shortUrl) {
-        Url byShortURL = shorterMapper.findByShortURL(shortUrl);
-        if (byShortURL == null) {
+        Url byShortUrl = shorterMapper.findByShortURL(shortUrl);
+        if (byShortUrl == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create(byShortURL.getOriginUrl()))
+                .location(URI.create(byShortUrl.getOriginUrl()))
                 .build();
     }
 }
