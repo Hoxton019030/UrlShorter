@@ -27,7 +27,6 @@ public class ShorterController {
     }
     @GetMapping(value = "{shorUrl}")
     public ResponseEntity<Void> redirectUrl(@PathVariable("shorUrl")String shortUrl){
-        System.out.println("shortUrl = " + shortUrl);
         return shorterService.findOriginUrl(shortUrl);
     }
 }
