@@ -52,7 +52,6 @@ public class ShorterService {
 
     public ResponseEntity<Void> findOriginUrl(String shortUrl) {
         Url byShortURL = shorterMapper.findByShortURL(shortUrl);
-        System.out.println("byShortURL = " + byShortURL);
         return ResponseEntity.status(HttpStatus.FOUND)
                 .location(URI.create(byShortURL.getOriginUrl()))
                 .build();
