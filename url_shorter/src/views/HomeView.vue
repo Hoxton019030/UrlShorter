@@ -1,9 +1,10 @@
 <template>
   <div>
     請輸入你要的短網址：
-  <input type="text"> 
+  <input type="text" v-model="input"> 
   <button @click="generate" >產生</button>
   <div>
+    短網址轉換：
   <a :href="shortUrl">{{shortUrl}}</a>
 
   </div>
@@ -15,10 +16,10 @@ import axios from 'axios';
 import {ref} from 'vue';
 
 var shortUrl=ref("")
-
+var input =ref("")
 const generate = () => {
   axios.post('http://localhost:8080/hoxton/api', {
-    url: 'https://ithelp.ithome.com.tw/articles/10253259',
+    url: input.value,
     size: 7
   })
   .then((response) => {
